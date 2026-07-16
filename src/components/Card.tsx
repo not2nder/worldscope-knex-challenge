@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Country } from "../types/country"
+import { CircleDollarSign } from "lucide-react";
+import { UsersRound } from "lucide-react";
 
 type CardProps = {
     country: Country;
@@ -8,15 +10,26 @@ type CardProps = {
 export default function Card({country}: CardProps) {
     return (
         <Link to={`/country/${country.codes.alpha_3}`} 
-            className='bg-white flex flex-col border border-slate-300 rounded-xl shadow-md shadow-slate-200 cursor-pointer'
+            className='bg-white flex flex-col border border-slate-300 rounded-xl shadow-md shadow-slate-200 cursor-pointer p-3'
         >
-            <img className='rounded-t-xl aspect-video object-cover object-center' src={country.flag.url_svg ?? country.flag.url_png}></img>
+            <img
+                src={country.flag.url_svg ?? country.flag.url_png}
+                alt={`Flag of ${country.names.common}`}
+                className='h-full w-full rounded-md aspect-video object-cover object-center'
+            />
 
-            <div className='p-2'>
-                <h3 className='font-bold'>{country.flag.emoji} {country.names.common}</h3>
-                <p>Region: {country.region}</p>
-                <p>Population: {country.population}</p>
-                <p>Currency: {country.currencies[0]?.name ?? "No Currency Information."}</p>
+            <div className='space-y-3 p-2'>
+                <h3 className='font-bold text-xl'>{country.flag.emoji} {country.names.common}</h3>
+                <p><span className="bg-cyan-200/25 text-cyan-700 border-cyan-700/10 border rounded-md p-0.5 px-2.5">{country.region}</span></p>
+                <div className="flex justify-between">
+                    <p className="text-slate-500 flex gap-2 items-center"><UsersRound/> Population</p>
+                    <p>{country.population.toLocaleString()}</p>
+                </div>
+                
+                <div className="flex justify-between">
+                    <p className="text-slate-500 flex gap-2 items-center"><CircleDollarSign/> Currency</p>
+                    <p>{country.currencies[0]?.name} ({country.currencies[0]?.code})</p>
+                </div>
             </div>
         </Link>
     )

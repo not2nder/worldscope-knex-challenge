@@ -44,22 +44,25 @@ function App() {
 
           <p className="text-slate-500">Discover key information about all countries.</p> 
 
-          <input
-            type='text'
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder='Search Countries...'
-            className='w-full px-4 py-2 rounded-xl border border-slate-300 bg-white'
-          />
+          <div className='relative w-full max-w-xl'>
+            <span className='pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400'><Search/></span>
+            <input
+              type='text'
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder='Search Countries...'
+              className='h-12 w-full rounded-2xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 shadow-sm outline-none'
+            />
+          </div>
           
-          <div className='grid grid-cols-3 gap-2 space-y-5 space-x-2'>
+          <div className='grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {filteredCountries.map((country) => (
               <Card key={country.names.common} country={country}/>
             ))}
           </div>
         </div>
       </div> 
-    </div>
+    </main>
   )
 }
 
