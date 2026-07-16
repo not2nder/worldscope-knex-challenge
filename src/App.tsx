@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './components/Header'
 import Card from './components/Card';
+import Pagination from './components/Pagination';
 import { Search } from 'lucide-react';
 import { useCountries } from './hooks/useCountries';
 
@@ -16,6 +17,17 @@ function App() {
   const filteredCountries = countries.filter((country) => 
     country.names.common.toLowerCase().includes(query.trim().toLowerCase())
   );
+
+  const [page, setPage] = useState(1);
+
+  const ITEMS_PER_PAGE = 25;
+  
+  const totalPages = Math.ceil(filteredCountries.length / ITEMS_PER_PAGE);
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
+
   if (isLoading) {
     return (
       <div>
@@ -29,7 +41,7 @@ function App() {
 
   if (isError) {
     return(
-      <p>Error Fetching data</p>
+      <p>error fetching data</p>
     )
   }
 
@@ -49,17 +61,27 @@ function App() {
             <input
               type='text'
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value)
+                setPage(1)
+              }}
               placeholder='Search Countries...'
               className='h-12 w-full rounded-2xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 shadow-sm outline-none'
             />
           </div>
           
           <div className='grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {filteredCountries.map((country) => (
+            {paginatedCountries.map((country) => (
               <Card key={country.names.common} country={country}/>
             ))}
           </div>
+
+          <Pagination 
+            totalPages={totalPages}
+            currentPage={page}
+            totalItems={filteredCountries.length}
+            onPageChange={setPage}
+            currentItems={paginatedCountries.length}/>
         </div>
       </div> 
     </main>
