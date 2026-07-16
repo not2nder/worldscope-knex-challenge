@@ -6,7 +6,9 @@ import { Search } from 'lucide-react';
 import { useCountries } from './hooks/useCountries';
 
 function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState<string>("");
+  const [selectedRegion, setSelectedRegion] = useState<string>("all")
+
   const {
     data: countries = [],
     isLoading,
@@ -14,8 +16,12 @@ function App() {
     error
   } = useCountries();
 
-  const filteredCountries = countries.filter((country) => 
-    country.names.common.toLowerCase().includes(query.trim().toLowerCase())
+  const filteredCountries = countries.filter((country) => {
+    const matchesQuery = country.names.common.toLowerCase().includes(query.trim().toLowerCase());
+    const matchesRegion = selectedRegion === "all" || country.region === selectedRegion;
+
+    return matchesQuery && matchesRegion
+  } 
   );
 
   const [page, setPage] = useState(1);
@@ -27,6 +33,9 @@ function App() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
   const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
+
+  const REGIONS = ["Africa","Americas","Asia","Europe","Oceania"];
+  const SORT_GROUPS = ["a-z asc", "a-z desc", "population asc", "population desc"];
 
   if (isLoading) {
     return (
@@ -55,6 +64,23 @@ function App() {
           </h2>
 
           <p className="text-slate-500">Discover key information about all countries.</p> 
+          
+          <select
+            value={selectedRegion}
+            onChange={(event) => {
+              setSelectedRegion(event.target.value);
+              setPage(1);
+            }}
+            className='h-12 rounded-xl border border-slate-200 bg-white px-3'
+            >
+              <option value="all">All Regions</option>
+
+              {REGIONS.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
+            </select>
 
           <div className='relative w-full max-w-xl'>
             <span className='pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400'><Search/></span>
