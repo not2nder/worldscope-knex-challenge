@@ -1,50 +1,42 @@
-import { useEffect, useState } from 'react';
-import type { Country } from './types/country';
-import type { APIResponse } from './types/api';
+import { useState } from 'react';
 import Header from './components/Header'
 import Card from './components/Card';
+import { Search } from 'lucide-react';
+import { useCountries } from './hooks/useCountries';
 
 function App() {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [query, setQuery] = useState<string>("");
-
-  useEffect(() => {
-    const URL = import.meta.env.VITE_BASE_URL;
-    const API_KEY = import.meta.env.VITE_API_KEY;
-
-    const LIMIT = 100;
-
-    const fetchCountries = async() => {
-      const response = await fetch(`${URL}?limit=${LIMIT}&offset=0`, {
-          headers: { Authorization: `Bearer ${API_KEY}` },
-        });
-      
-      const data: APIResponse = await response.json();
-      const total = data.data.meta.total;
-      const allCountries = [...data.data.objects];
-
-      for (let offset = LIMIT; offset < total; offset += LIMIT) {
-        const newResponse = await fetch(`${URL}?limit=${LIMIT}&offset=${offset}`, {
-          headers: {Authorization: `Bearer ${API_KEY}`}
-        });
-        const newData: APIResponse = await newResponse.json()
-
-        allCountries.push(...newData.data.objects)
-      };
-
-      setCountries(allCountries);
-    }
-    fetchCountries()
-  }, []);
+  const [query, setQuery] = useState("");
+  const {
+    data: countries = [],
+    isLoading,
+    isError,
+    error
+  } = useCountries();
 
   const filteredCountries = countries.filter((country) => 
     country.names.common.toLowerCase().includes(query.trim().toLowerCase())
   );
+  if (isLoading) {
+    return (
+      <div>
+        <Header/>
+        <main className='min-h-screen bg-slate-100 p-4'>
+          <p>Loading Countries...</p>
+        </main>
+      </div>
+    )
+  }
+
+  if (isError) {
+    return(
+      <p>Error Fetching data</p>
+    )
+  }
 
   return (
-    <div>
+    <main className='min-h-screen w-full bg-linear-to-br from-slate-50 via-white to-cyan-50 text-slate-950'>
       <Header/>
-      <div className="min-h-screen w-full flex flex-col p-4 bg-slate-100"> 
+      <div className="mx-auto w-full max-x-7xl px-4 py-8 sm:px-6 lg:px-8"> 
         <div className='space-y-3 flex flex-col items-center'>
           <h2 className="text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
             Explore countries around the world

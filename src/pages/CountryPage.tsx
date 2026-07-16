@@ -1,29 +1,23 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import type { APIResponse } from "../types/api";
-import type { Country } from "../types/country";
 import Header from "../components/Header";
+import { useCountry } from "../hooks/useCountries";
 
 export default function CountryPage(){
     const {code} = useParams();
-    const [country, setCountry] = useState<Country | null>()
-    
-    useEffect(() => {
-        const URL = import.meta.env.VITE_BASE_URL;
-        const API_KEY = import.meta.env.VITE_API_KEY;
+    const {
+        data: country,
+        isLoading,
+        isError,
+        error,
+    } = useCountry(code);
 
-        const fetchCountry = async() => {
-            const response = await fetch(`${URL}/codes.alpha_3/${code}`, {    
-                headers: {
-                    Authorization: `Bearer ${API_KEY}`
-                },
-            });
+    if (isLoading) {
+        return <p>Loading country info...</p>
+    }
 
-            const data: APIResponse = await response.json();
-            setCountry(data.data.objects[0]);
-        }
-        fetchCountry()
-    }, []);
+    if (isError) {
+        return <p>Error Fetching data</p>
+    }
 
     return (
         <div className="min-h-screen">
