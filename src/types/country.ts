@@ -3,6 +3,12 @@ export type Country = {
     common: string;
     official: string;
   };
+  codes: {
+    alpha_3: string;
+  };
+  languages: {
+    name: string;
+  }[];
   region: string;
   flag: {
     url_png: string;
@@ -15,4 +21,8 @@ export type Country = {
     name: string;
     symbol: string;
   }[];
+  area: {
+    kilometers: number;
+  };
+  timezones: string[];
 }
