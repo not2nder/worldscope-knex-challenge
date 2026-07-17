@@ -15,7 +15,6 @@ function App() {
     data: countries = [],
     isLoading,
     isError,
-    error
   } = useCountries();
 
   const filteredCountries = countries.filter((country) => {
@@ -26,29 +25,17 @@ function App() {
   } 
   );
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
 
-  const ITEMS_PER_PAGE = 25;
+  const ITEMS_PER_PAGE: number = 25;
   
-  const totalPages = Math.ceil(filteredCountries.length / ITEMS_PER_PAGE);
-  const startIndex = (page - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const totalPages: number = Math.ceil(filteredCountries.length / ITEMS_PER_PAGE);
+  const startIndex: number = (page - 1) * ITEMS_PER_PAGE;
+  const endIndex: number = startIndex + ITEMS_PER_PAGE;
 
-  const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
+  const paginatedCountries: Country[] = filteredCountries.slice(startIndex, endIndex);
 
-  const REGIONS = ["Africa","Americas","Asia","Europe","Oceania"];
-  const SORT_GROUPS = ["a-z asc", "a-z desc", "population asc", "population desc"];
-
-  if (isLoading) {
-    return (
-      <div>
-        <Header/>
-        <main className='min-h-screen bg-slate-100 p-4'>
-          <p>Loading Countries...</p>
-        </main>
-      </div>
-    )
-  }
+  const REGIONS: string[] = ["Africa","Americas","Asia","Europe","Oceania"];
 
   if (isError) {
     return(
@@ -67,14 +54,27 @@ function App() {
 
           <p className="text-slate-500">Discover key information about all countries.</p> 
           
+          <div className='relative w-full max-w-xl'>
+            <span className='pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400'><Search/></span>
+            <input
+              type='text'
+              value={query}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setPage(1);
+              }}
+              placeholder='Search Countries...'
+              className='h-12 w-full rounded-2xl border border-slate-300 bg-white pl-11 pr-4 text-sm text-slate-900 shadow-sm outline-none'
+            />
+          </div>
+
           <select
             value={selectedRegion}
             onChange={(event) => {
               setSelectedRegion(event.target.value);
               setPage(1);
             }}
-            className='h-12 rounded-xl border border-slate-200 bg-white px-3'
-            >
+            className='h-10 rounded-md border border-slate-200 bg-white px-3'>
               <option value="all">All Regions</option>
 
               {REGIONS.map((region) => (
