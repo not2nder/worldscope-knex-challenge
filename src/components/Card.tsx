@@ -18,7 +18,7 @@ export default function Card({country}: CardProps) {
                 className='h-full w-full rounded-md aspect-video object-cover object-center'
             />
 
-            <div className='space-y-3 p-2'>
+            <div className='space-y-3 pt-2'>
                 <h3 className='font-bold text-xl'>{country.flag.emoji} {country.names.common}</h3>
                 <p><span className="bg-cyan-200/25 text-cyan-700 border-cyan-700/10 border rounded-md p-0.5 px-2.5">{country.region}</span></p>
                 <div className="flex justify-between">

@@ -4,6 +4,8 @@ import Card from './components/Card';
 import Pagination from './components/Pagination';
 import { Search } from 'lucide-react';
 import { useCountries } from './hooks/useCountries';
+import GridSkeleton from './components/GridSkeleton';
+import type { Country } from './types/country';
 
 function App() {
   const [query, setQuery] = useState<string>("");
@@ -80,23 +82,10 @@ function App() {
                   {region}
                 </option>
               ))}
-            </select>
-
-          <div className='relative w-full max-w-xl'>
-            <span className='pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400'><Search/></span>
-            <input
-              type='text'
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value)
-                setPage(1)
-              }}
-              placeholder='Search Countries...'
-              className='h-12 w-full rounded-2xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 shadow-sm outline-none'
-            />
-          </div>
+          </select>
           
-          <div className='grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+          {isLoading && <GridSkeleton />}
+          <div className='grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'> 
             {paginatedCountries.map((country) => (
               <Card key={country.names.common} country={country}/>
             ))}
