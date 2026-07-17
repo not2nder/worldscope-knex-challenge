@@ -1,3 +1,5 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 type PaginationProps = {
     totalPages: number;
     currentPage: number;
@@ -7,33 +9,43 @@ type PaginationProps = {
 }
 
 export default function Pagination({totalPages, currentPage, totalItems, currentItems, onPageChange}: PaginationProps){
-    const pages = Array.from({length: totalPages}, (_, index) => index+1);
 
-    return (
+    return totalPages > 1 && (
         <div className="w-full mt-8 flex items-center justify-between gap-3 ">
             <div className="text-slate-400">
                 Page {currentPage} of {totalPages}
             </div>
 
-            <div className="flex gap-1.5">
-                {pages.map(i => (
-                    <button
-                        key={i}
-                        type="button"
-                        onClick={() => onPageChange(i)}
-                        className={
-                            currentPage === i
-                            ? "rounded-md border border-slate-300 bg-cyan-100 px-4 py-2 text-sm"
-                            : "rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            <div className="flex gap-2">
+                <button type="button"
+                    onClick={() => {
+                        if (currentPage <= 1) {
+                            return;
                         }
-                    >{i}
-                    </button>
-                ))}
+                        onPageChange(currentPage - 1)
+                    }}
+                    className="cursor-pointer"
+                ><ChevronLeft/>
+                </button>
+
+                <button className="flex items-center justify-center rounded-full w-10 h-10 bg-cyan-500 text-white p-2">
+                    {currentPage}
+                </button>
+                
+                <button type="button"
+                    onClick={() => {
+                        if (currentPage >= totalPages) {
+                            return;
+                        }
+                        onPageChange(currentPage + 1);
+                    }}
+                    className="cursor-pointer"
+                ><ChevronRight/>
+                </button>
             </div>
 
-
             <div className="text-slate-400">
-                Showing {currentItems} of {totalItems} Results
+                {currentItems}/{totalItems}
             </div>
         </div>
     )
