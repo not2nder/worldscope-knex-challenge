@@ -8,7 +8,6 @@ export default function CountryPage(){
         data: country,
         isLoading,
         isError,
-        error,
     } = useCountry(code);
 
     if (isLoading) {
