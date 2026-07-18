@@ -5,14 +5,14 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 export async function getCountriesPage(
-    limit: number,
-    offset: number
+  limit: number,
+  offset: number,
 ): Promise<APIResponse> {
-    const response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`, {
-        headers: { Authorization: `Bearer ${API_KEY}`}
-    })
+  const response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`, {
+    headers: { Authorization: `Bearer ${API_KEY}` },
+  });
 
-    return response.json()
+  return response.json();
 }
 
 export async function getAllCountries(): Promise<Country[]> {
