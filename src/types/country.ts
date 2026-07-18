@@ -25,4 +25,5 @@ export type Country = {
     kilometers: number;
   };
   timezones: string[];
-}
+  borders: string[];
+};
