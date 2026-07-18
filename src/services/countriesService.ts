@@ -46,3 +46,19 @@ export async function getCountryByCode(code: string): Promise<Country> {
 
   return data.data.objects[0];
 }
+
+export async function getCountryByName(name: string): Promise<Country> {
+  const response = await fetch(`${BASE_URL}/names.common/${name}`, {
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Não foi possível carregar os detalhes do país.");
+  }
+
+  const data: APIResponse = await response.json();
+
+  return data.data.objects[0];
+}

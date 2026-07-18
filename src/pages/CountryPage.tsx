@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useCountry } from "../hooks/useCountries";
 import MainLayout from "../layouts/MainLayout";
+import flagPlaceholder from "../assets/flagPlaceholder.svg";
 
 export default function CountryPage() {
-  const { code } = useParams();
-  const { data: country, isLoading, isError } = useCountry(code);
+  const { code, name } = useParams();
+
+  const { data: country, isLoading, isError } = useCountry({ code, name });
 
   if (isLoading) {
     return <p>Loading country info...</p>;
@@ -21,7 +23,10 @@ export default function CountryPage() {
           {country?.flag.emoji} {country?.names.common}
         </h2>
         <img
-          src={country?.flag?.url_svg ?? country?.flag?.url_png}
+          src={
+            (country?.flag?.url_svg ?? country?.flag?.url_png) ||
+            flagPlaceholder
+          }
           className="rounded-xl aspect-video object-cover object-center"
         ></img>
 
