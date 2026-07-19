@@ -47,7 +47,7 @@ function App() {
 
   return (
     <MainLayout>
-      <div className="space-y-3 flex flex-col items-center">
+      <div className="flex flex-col items-center space-y-6">
         <h2 className="text-3xl text-center font-bold bg-linear-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
           Explore countries around the world
         </h2>
@@ -56,9 +56,10 @@ function App() {
         </p>
 
         <div className="w-full gap-2 py-5 flex-col md:flex md:flex-row space-y-2.5">
+          {/* search */}
           <div className="relative w-full">
             <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-              <Search />
+              <Search size={20} />
             </span>
             <input
               type="text"
@@ -68,18 +69,18 @@ function App() {
                 setPage(1);
               }}
               placeholder="Search Countries..."
-              className="h-12 w-full rounded-md border border-slate-300 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none"
+              className="h-12 w-full rounded-md border border-slate-300 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400"
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:w-107.5">
             <select
               value={selectedRegion}
               onChange={(event) => {
                 setSelectedRegion(event.target.value);
                 setPage(1);
               }}
-              className="w-full h-12 rounded-md border border-slate-300 bg-white px-3"
+              className="h-12 w-full rounded-md border border-slate-300 bg-white px-3"
             >
               <option value="all">All Regions</option>
               {REGIONS.map((region) => (
@@ -109,20 +110,25 @@ function App() {
         {isLoading ? (
           <GridSkeleton />
         ) : (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {paginatedCountries.map((country) => (
-              <Card key={country.codes.alpha_3} country={country} />
+              <Card
+                key={country.codes.alpha_3 || country.names.common}
+                country={country}
+              />
             ))}
           </div>
         )}
 
-        <Pagination
-          totalPages={totalPages}
-          currentPage={page}
-          totalItems={sortedCountries.length}
-          onPageChange={setPage}
-          currentItems={paginatedCountries.length}
-        />
+        {!isLoading && (
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            totalItems={sortedCountries.length}
+            onPageChange={setPage}
+            currentItems={paginatedCountries.length}
+          />
+        )}
       </div>
     </MainLayout>
   );

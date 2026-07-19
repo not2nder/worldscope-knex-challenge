@@ -16,7 +16,7 @@ export default function Card({ country }: CardProps) {
 
   return (
     <Link to={`${route}${countryIdentifier}`}>
-      <div className="bg-white flex flex-col border border-slate-300 rounded-xl shadow-md shadow-slate-200 cursor-pointer p-3 hover:-translate-y-1.5 transition-all duration-200">
+      <div className="bg-white flex flex-col border border-slate-300 rounded-xl shadow-sm shadow-slate-100 cursor-pointer p-3 hover:-translate-y-1.5 transition-all duration-200">
         <img
           src={
             (country.flag.url_svg ?? country.flag.url_png) || flagPlaceholder
@@ -25,7 +25,7 @@ export default function Card({ country }: CardProps) {
           className="h-full w-full rounded-md aspect-video object-cover object-center"
         />
 
-        <div className="space-y-3 pt-2">
+        <div className="space-y-3 pt-2 text-sm">
           <h3 className="font-bold text-xl">
             {country.flag.emoji} {country.names.common}
           </h3>
@@ -34,7 +34,7 @@ export default function Card({ country }: CardProps) {
               {country.region}
             </span>
           </p>
-          <div className="flex justify-between">
+          <div className="flex items-center gap-2">
             <p className="text-slate-500 flex gap-2 items-center">
               <UsersRound /> Population
             </p>
@@ -43,7 +43,7 @@ export default function Card({ country }: CardProps) {
             </p>
           </div>
 
-          <div className="flex justify-between gap-2.5">
+          <div className="flex items-center gap-2">
             <p className="text-slate-500 flex gap-2 items-center">
               <CircleDollarSign /> Currency
             </p>
