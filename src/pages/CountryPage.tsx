@@ -15,6 +15,7 @@ import { useCountry } from "../hooks/useCountries";
 import MainLayout from "../layouts/MainLayout";
 import flagPlaceholder from "../assets/flagPlaceholder.svg";
 import CountryItem from "../components/CountryItem";
+import DetailsSkeleton from "../components/DetailsSkeleton";
 
 export default function CountryPage() {
   const { code, name } = useParams();
@@ -23,7 +24,7 @@ export default function CountryPage() {
   if (isLoading) {
     return (
       <MainLayout>
-        <p className="text-slate-500">Loading Country info...</p>
+        <DetailsSkeleton />
       </MainLayout>
     );
   }
@@ -66,7 +67,7 @@ export default function CountryPage() {
       <div className="space-y-4">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+          className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
         >
           <ChevronLeft size={18} />
           Back to countries
@@ -74,7 +75,7 @@ export default function CountryPage() {
 
         <div className="grid gap-4 lg:grid-cols-2">
           {/* left */}
-          <div className="rounded-xl space-y-2.5 border border-slate-200 bg-white p-3 shadow-sm">
+          <div className="rounded-xl space-y-2.5 border border-slate-200 bg-white p-3 ">
             <img
               src={flagUrl}
               alt={`Flag of ${country.names.common}`}
@@ -102,7 +103,7 @@ export default function CountryPage() {
           </div>
 
           {/* right */}
-          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="rounded-xl border border-slate-200 bg-white p-4 ">
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">
                 {country.region}
@@ -176,7 +177,7 @@ export default function CountryPage() {
         </div>
 
         {/* bottom */}
-        <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+        <div className="rounded-xl border border-slate-200 bg-white p-3 ">
           <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <div>
