@@ -16,7 +16,7 @@ export default function Card({ country }: CardProps) {
 
   return (
     <Link to={`${route}${countryIdentifier}`}>
-      <div className="bg-white flex flex-col border border-slate-300 rounded-xl shadow-sm shadow-slate-100 cursor-pointer p-3 hover:-translate-y-1.5 transition-all duration-200">
+      <div className="bg-white flex flex-col border border-slate-300 rounded-xl cursor-pointer p-3 hover:-translate-y-1.5 transition-all duration-200">
         <img
           src={
             (country.flag.url_svg ?? country.flag.url_png) || flagPlaceholder
