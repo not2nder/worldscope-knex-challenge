@@ -192,7 +192,7 @@ export default function CountryPage() {
                 {country.borders.map((border) => (
                   <Link
                     key={border}
-                    to={`/country/code/${border}`}
+                    to={`/country/${border}`}
                     className="group inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700"
                   >
                     <span>{border}</span>
