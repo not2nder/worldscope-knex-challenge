@@ -1,90 +1,215 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import {
+  ChevronLeft,
+  ChevronRight,
+  CircleDollarSign,
+  Clock,
+  Map,
+  MapPin,
+  MessageCircle,
+  Ruler,
+  UsersRound,
+} from "lucide-react";
+
 import { useCountry } from "../hooks/useCountries";
 import MainLayout from "../layouts/MainLayout";
 import flagPlaceholder from "../assets/flagPlaceholder.svg";
-
-import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import CountryItem from "../components/CountryItem";
 
 export default function CountryPage() {
   const { code, name } = useParams();
-
   const { data: country, isLoading, isError } = useCountry({ code, name });
 
   if (isLoading) {
-    return <p>Loading country info...</p>;
+    return (
+      <MainLayout>
+        <p className="text-slate-500">Loading Country info...</p>
+      </MainLayout>
+    );
   }
 
-  if (isError) {
-    return <p>Error Fetching data</p>;
+  if (isError || !country) {
+    return (
+      <MainLayout>
+        <p className="text-slate-500">Error fetching data.</p>
+      </MainLayout>
+    );
   }
+
+  const flagUrl =
+    country.flag?.url_svg ?? country.flag?.url_png ?? flagPlaceholder;
+  const hasFlagImage = Boolean(country.flag?.url_svg ?? country.flag?.url_png);
+
+  const capitals =
+    country.capitals?.map((capital) => capital.name).join(", ") ||
+    "Not informed";
+
+  const languages =
+    country.languages?.map((language) => language.name).join(", ") ||
+    "Not informed";
+
+  const currencies =
+    country.currencies?.map((currency) => currency.name).join(", ") ||
+    "Not informed";
+
+  const timezones = country.timezones?.join(", ") || "Not informed";
+
+  const population =
+    country.population?.toLocaleString("en-US") ?? "Not informed";
+
+  const area = country.area?.kilometers
+    ? `${country.area.kilometers.toLocaleString("en-US")} km²`
+    : "Not informed";
 
   return (
     <MainLayout>
-      <div className="flex flex-col bg-white rounded-xl border border-slate-300 p-3 space-y-3">
-        <h2 className="text-2xl font-bold">
-          {country?.flag.emoji} {country?.names.common}
-        </h2>
-        <img
-          src={
-            (country?.flag?.url_svg ?? country?.flag?.url_png) ||
-            flagPlaceholder
-          }
-          className="rounded-xl aspect-video object-cover object-center"
-        ></img>
+      <div className="space-y-4">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+        >
+          <ChevronLeft size={18} />
+          Back to countries
+        </Link>
 
-        <p>
-          <strong>Official Name</strong>: {country?.names.official}
-        </p>
-        <p>
-          <strong>Region</strong>: {country?.region}
-        </p>
-        <p>
-          <strong>Population</strong>: {country?.population}
-        </p>
-        <p>
-          <strong>Area</strong>: {country?.area.kilometers} Kilometers
-        </p>
-        <p>
-          <strong>Currencies</strong>:{" "}
-          {country?.currencies
-            .map((currency) => `${currency.name} (${currency.code})`)
-            .join(", ")}
-        </p>
-        <p>
-          <strong>Languages</strong>:{" "}
-          {country?.languages.map((language) => language.name).join(", ")}
-        </p>
-        <p>
-          <strong>Timezones</strong>: {country?.timezones.join(", ")}
-        </p>
+        <div className="grid gap-4 lg:grid-cols-2">
+          {/* left */}
+          <div className="rounded-xl space-y-2.5 border border-slate-200 bg-white p-3 shadow-sm">
+            <img
+              src={flagUrl}
+              alt={`Flag of ${country.names.common}`}
+              className="aspect-video w-full rounded-md object-cover object-center"
+            />
 
-        <section className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-            Border Countries: {country?.borders.length ?? 0}
-          </h3>
+            {hasFlagImage && country.flag?.colors?.palette?.length > 0 && (
+              <div className="border-t border-slate-100">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                  Flag palette
+                </p>
 
-          {country?.borders && country.borders.length > 0 ? (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {country.borders.map((border) => (
-                <Link
-                  key={border}
-                  to={`/country/${border}`}
-                  className="group inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700"
-                >
-                  <span>{border}</span>
-                  <span className="text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-cyan-600">
-                    <ChevronRight />
-                  </span>
-                </Link>
-              ))}
+                <div className="flex items-center gap-2">
+                  {country.flag.colors.palette.map((color) => (
+                    <div
+                      key={color.hex}
+                      title={color.hex}
+                      style={{ backgroundColor: color.hex }}
+                      className="h-7 w-7 rounded-full"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* right */}
+          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">
+                {country.region}
+              </span>
+
+              {country.subregion && (
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                  {country.subregion}
+                </span>
+              )}
             </div>
-          ) : (
-            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">
-              This country has no listed border countries.
+
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900">
+              {country.flag?.emoji} {country.names.common}
+            </h2>
+
+            <p className="mt-1 text-sm text-slate-500">
+              {country.names.official}
+            </p>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <CountryItem
+                icon={<MapPin size={18} />}
+                title="Capital"
+                text={capitals}
+              />
+
+              <CountryItem
+                icon={<Map size={18} />}
+                title="Region"
+                text={country.region}
+              />
+
+              <CountryItem
+                icon={<Map size={18} />}
+                title="Subregion"
+                text={country.subregion || "Not informed"}
+              />
+
+              <CountryItem
+                icon={<UsersRound size={18} />}
+                title="Population"
+                text={population}
+              />
+
+              <CountryItem
+                icon={<Ruler size={18} />}
+                title="Area"
+                text={area}
+              />
+
+              <CountryItem
+                icon={<MessageCircle size={18} />}
+                title="Languages"
+                text={languages}
+              />
+
+              <CountryItem
+                icon={<CircleDollarSign size={18} />}
+                title="Currencies"
+                text={currencies}
+              />
+
+              <CountryItem
+                icon={<Clock size={18} />}
+                title="Timezones"
+                text={timezones}
+              />
             </div>
-          )}
-        </section>
+          </div>
+        </div>
+
+        {/* bottom */}
+        <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+          <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Border Countries ({country.borders.length ?? 0})
+                </h3>
+              </div>
+            </div>
+
+            {country.borders && country.borders.length > 0 ? (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {country.borders.map((border) => (
+                  <Link
+                    key={border}
+                    to={`/country/code/${border}`}
+                    className="group inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700"
+                  >
+                    <span>{border}</span>
+
+                    <ChevronRight
+                      size={16}
+                      className="text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-cyan-600"
+                    />
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-4 rounded-lg border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
+                This country has no listed border countries.
+              </div>
+            )}
+          </section>
+        </div>
       </div>
     </MainLayout>
   );

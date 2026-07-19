@@ -3,6 +3,9 @@ export type Country = {
     common: string;
     official: string;
   };
+  capitals: {
+    name: string;
+  }[];
   codes: {
     alpha_3: string;
   };
@@ -10,10 +13,16 @@ export type Country = {
     name: string;
   }[];
   region: string;
+  subregion: string;
   flag: {
     url_png: string;
     url_svg: string;
     emoji: string;
+    colors: {
+      palette: {
+        hex: string;
+      }[];
+    };
   };
   population: number;
   currencies: {
