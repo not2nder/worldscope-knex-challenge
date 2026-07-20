@@ -1,21 +1,17 @@
 import { Link } from "react-router-dom";
+import { CircleDollarSign, UsersRound } from "lucide-react";
+
 import type { Country } from "../types/country";
-import { CircleDollarSign } from "lucide-react";
-import { UsersRound } from "lucide-react";
 import flagPlaceholder from "../assets/flagPlaceholder.svg";
-import { getCountryIdentifier } from "../utils/getCountryIdentifier";
+import { getCountryRoute } from "../utils/getCountryRoute";
 
 type CardProps = {
   country: Country;
 };
 
 export default function Card({ country }: CardProps) {
-  const countryIdentifier = getCountryIdentifier(country);
-  const route =
-    countryIdentifier == country.codes.alpha_3 ? "/country/" : "/country/name/";
-
   return (
-    <Link to={`${route}${countryIdentifier}`}>
+    <Link to={getCountryRoute(country)}>
       <div className="bg-white flex flex-col border border-slate-300 rounded-xl cursor-pointer p-3 hover:-translate-y-1.5 transition-all duration-200">
         <img
           src={
