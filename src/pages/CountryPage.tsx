@@ -16,6 +16,7 @@ import MainLayout from "../layouts/MainLayout";
 import flagPlaceholder from "../assets/flagPlaceholder.svg";
 import CountryItem from "../components/CountryItem";
 import DetailsSkeleton from "../components/DetailsSkeleton";
+import ErrorState from "../components/ErrorState";
 
 export default function CountryPage() {
   const { code, name } = useParams();
@@ -32,7 +33,10 @@ export default function CountryPage() {
   if (isError || !country) {
     return (
       <MainLayout>
-        <p className="text-slate-500">Error fetching data.</p>
+        <ErrorState
+          title="Could not load country details"
+          message="The selected country could not be found or the API request failed."
+        />
       </MainLayout>
     );
   }

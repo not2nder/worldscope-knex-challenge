@@ -12,6 +12,7 @@ import EmptyState from "../components/EmptyState";
 import { sortCountries, type SortOption } from "../utils/sortCountries";
 import { filterCountries } from "../utils/filterCountries";
 import { paginateCountries } from "../utils/paginateCountries";
+import ErrorState from "../components/ErrorState";
 
 const ITEMS_PER_PAGE = 25;
 
@@ -45,9 +46,10 @@ export default function HomePage() {
   if (isError) {
     return (
       <MainLayout>
-        <p className="text-slate-500 dark:text-slate-400">
-          Error fetching data.
-        </p>
+        <ErrorState
+          title="Could not load countries"
+          message="Please check your connection, API key or try again later"
+        />
       </MainLayout>
     );
   }
