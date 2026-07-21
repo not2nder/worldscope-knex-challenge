@@ -39,7 +39,7 @@ export async function getCountryByCode(code: string): Promise<Country> {
   });
 
   if (!response.ok) {
-    throw new Error("Não foi possível carregar os detalhes do país.");
+    throw new Error("Could not load country deatils");
   }
 
   const data: APIResponse = await response.json();
@@ -55,7 +55,7 @@ export async function getCountryByName(name: string): Promise<Country> {
   });
 
   if (!response.ok) {
-    throw new Error("Não foi possível carregar os detalhes do país.");
+    throw new Error("Could not load country details");
   }
 
   const data: APIResponse = await response.json();
