@@ -37,9 +37,6 @@ export default function CountryPage() {
     );
   }
 
-  const flagUrl =
-    country.flag?.url_svg ?? country.flag?.url_png ?? flagPlaceholder;
-
   const hasFlagImage = Boolean(country.flag?.url_svg ?? country.flag?.url_png);
 
   const capitals =
