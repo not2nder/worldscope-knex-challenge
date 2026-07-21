@@ -3,17 +3,23 @@ export type Country = {
     common: string;
     official: string;
   };
+
   capitals: {
     name: string;
   }[];
+
   codes: {
-    alpha_3: string;
+    alpha_3?: string;
+    alpha_2?: string;
   };
+
   languages: {
     name: string;
   }[];
+
   region: string;
   subregion: string;
+
   flag: {
     url_png: string;
     url_svg: string;
@@ -24,15 +30,19 @@ export type Country = {
       }[];
     };
   };
+
   population: number;
+
   currencies: {
     code: string;
     name: string;
     symbol: string;
   }[];
+
   area: {
     kilometers: number;
   };
-  timezones: string[];
-  borders: string[];
+
+  timezones?: string[];
+  borders?: string[];
 };

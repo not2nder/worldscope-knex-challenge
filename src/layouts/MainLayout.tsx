@@ -6,7 +6,7 @@ type MainLayoutProps = {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <main className="min-h-screen w-full bg-linear-to-br from-slate-50 via-white to-cyan-50 text-slate-950">
+    <main className="min-h-screen w-full bg-linear-to-br from-slate-50 via-white to-cyan-50 text-slate-950 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100">
       <Header />
 
       <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

@@ -50,11 +50,11 @@ function App() {
       <div className="flex flex-col items-center space-y-5">
         <section className="w-full py-8">
           <div className="max-w-3xl space-y-4">
-            <span className="inline-flex items-center rounded-full border border-cyan-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-700 shadow-sm">
+            <span className="inline-flex items-center rounded-full border border-cyan-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-700 shadow-sm dark:bg-[#0F1A2B] dark:border-[#1E293B]">
               🌎 Navigate the world with clarity
             </span>
 
-            <h1 className="text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl dark:text-[#E2E8F0]">
               Discover countries with{" "}
               <span className="bg-linear-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
                 WorldScope
@@ -73,7 +73,7 @@ function App() {
           <div className="flex flex-col gap-3 md:flex-row">
             {/* search */}
             <div className="relative w-full">
-              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500">
                 <Search size={20} />
               </span>
               <input
@@ -84,7 +84,7 @@ function App() {
                   setPage(1);
                 }}
                 placeholder="Search Countries..."
-                className="h-12 w-full rounded-xl border border-slate-300 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/10 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 dark:hover:border-slate-700"
               />
             </div>
 
@@ -95,7 +95,7 @@ function App() {
                   setSelectedRegion(event.target.value);
                   setPage(1);
                 }}
-                className="h-12 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-800"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/10 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-700"
               >
                 <option value="all">All Regions</option>
                 {REGIONS.map((region) => (
@@ -111,7 +111,7 @@ function App() {
                   setSortOption(event.target.value as SortOption);
                   setPage(1);
                 }}
-                className="h-12 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-800"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/10 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-700"
               >
                 {SORT_GROUPS.map((group) => (
                   <option key={group} value={group}>

@@ -2,17 +2,30 @@ import imagePlaceholder from "../assets/imagePlaceholder.svg";
 
 export default function CardSkeleton() {
   return (
-    <div className="bg-white flex flex-col border border-slate-300 rounded-xl p-3 transition-all duration-200">
-      <img
-        src={imagePlaceholder}
-        className="h-full w-full rounded-md aspect-video object-cover object-center animate-pulse"
-      />
+    <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition-all duration-200 dark:border-slate-800 dark:bg-slate-900">
+      <div className="overflow-hidden rounded-md bg-slate-100 dark:bg-slate-800">
+        <img
+          src={imagePlaceholder}
+          alt=""
+          aria-hidden="true"
+          className="aspect-video h-full w-full animate-pulse object-cover object-center opacity-70 dark:opacity-40"
+        />
+      </div>
 
-      <div className="space-y-3 pt-2 text-sm">
-        <div className="h-8 w-40 rounded-md bg-gray-200 animate-pulse" />
-        <div className="h-7 w-25 rounded-md bg-gray-200 animate-pulse" />
-        <div className="h-6 rounded-md bg-gray-200 animate-pulse" />
-        <div className="h-6 rounded-md bg-gray-200 animate-pulse" />
+      <div className="space-y-3 pt-3 text-sm">
+        <div className="h-7 w-40 animate-pulse rounded-md bg-slate-200 dark:bg-slate-800" />
+
+        <div className="h-6 w-24 animate-pulse rounded-full bg-slate-200 dark:bg-slate-800" />
+
+        <div className="flex items-center justify-between gap-3">
+          <div className="h-5 w-28 animate-pulse rounded-md bg-slate-200 dark:bg-slate-800" />
+          <div className="h-5 w-20 animate-pulse rounded-md bg-slate-200 dark:bg-slate-800" />
+        </div>
+
+        <div className="flex items-center justify-between gap-3">
+          <div className="h-5 w-24 animate-pulse rounded-md bg-slate-200 dark:bg-slate-800" />
+          <div className="h-5 w-28 animate-pulse rounded-md bg-slate-200 dark:bg-slate-800" />
+        </div>
       </div>
     </div>
   );
