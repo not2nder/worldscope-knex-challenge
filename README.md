@@ -46,7 +46,7 @@ Ao selecionar um país, o usuário é direcionado para uma página dedicada com 
 A interface também conta com tema claro, escuro e sistema, com persistência da preferência entre sessões.
 
 <p align="center">
-  <img src="./docs/theme-toggle.gif" alt="WorldScope em tema escuro" width="800" />
+  <img src="./docs/theme-toggle.gif" alt="Demonstração da mudança de tema" width="800" />
 </p>
 
 Outros estados tratados pela aplicação:
@@ -57,9 +57,7 @@ Outros estados tratados pela aplicação:
 - fallback para dados ausentes retornados pela API
 - layout responsivo para desktop e mobile
 
----
-
-## Tecnologias
+## ⚙️ Tecnologias
 
 - **React**: construção da interface com componentes reutilizáveis.
 - **TypeScript**: tipagem dos dados da API, props, hooks e funções auxiliares.
@@ -70,7 +68,7 @@ Outros estados tratados pela aplicação:
 - **Lucide React**: ícones leves e consistentes.
 - **RestCountries API v5**: fonte dos dados geográficos.
 
-## Como rodar localmente
+## 🛠️ Como rodar localmente
 
 Clone o repositório:
 
@@ -128,3 +126,9 @@ src/
 ```
 
 Essa organização mantém os componentes focados na interface, enquanto regras de busca, filtros, rotas, tipagens e chamadas externas ficam isoladas em suas próprias camadas. Dessa forma, o projeto se torna mais fácil de entender e expandir.
+
+## 👤 Autor
+
+Desenvolvido por Anderson.
+
+GitHub: [@not2nder](https://github.com/not2nder)
