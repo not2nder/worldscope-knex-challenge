@@ -79,7 +79,6 @@ export default function CountryPage() {
 
         <div className="grid gap-4 lg:grid-cols-2">
           {/* left */}
-          {/* left */}
           <div className="self-start space-y-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
             <div className="overflow-hidden rounded-md bg-slate-100 dark:bg-slate-800">
               <img
