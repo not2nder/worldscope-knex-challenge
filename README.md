@@ -9,66 +9,70 @@
 </p>
 
 <p align="center">
-  <img alt="React" src="https://img.shields.io/badge/React-v19.1.0-blue" />
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-blue" />
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/TailwindCSS-v4-38BDF8" />
-  <img alt="Status" src="https://img.shields.io/badge/Status-Development-yellow" />
+  <img alt="React" src="https://img.shields.io/badge/React-v19.2.7-blue" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-v6.0.2-blue" />
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/TailwindCSS-v4.3.2-38BDF8" />
+  <img alt="Status" src="https://img.shields.io/badge/Status-Concluído-green" />
 </p>
 
-## 📌 Sobre
+## 📘 Sobre
 
 > Este projeto foi desenvolvido como parte do desafio técnico para a vaga de **Desenvolvedor Front-End** no Processo Seletivo 2026.2 da **Knex Consultoria Jr.**
 
-**WorldScope** é uma aplicação web para consulta de informações geográficas de países.
+**WorldScope** é uma aplicação web para consulta e exploração de informações geográficas de países. A aplicação permite pesquisar, filtrar, ordenar e visualizar detalhes de países de forma simples, rápida e responsiva.
 
-O projeto permite pesquisar, filtrar, ordenar e visualizar detalhes de países de forma simples, rápida e responsiva. A proposta é transformar dados geográficos em uma interface limpa, organizada e agradável de usar.
+O projeto consome a **RestCountries API v5**, exibindo dados como bandeira, nome, região, população, moeda, capital, idiomas, fusos horários, área territorial e países fronteiriços.
 
-A aplicação consome a **RestCountries API v5**, exibindo dados como bandeira, nome, região, população, moeda, capital, idiomas, fusos horários, área territorial e países fronteiriços.
+**Acesse o projeto:** [https://worldscope-navy.vercel.app](https://worldscope-navy.vercel.app)
 
-## 🚀 Deploy
+<p align="center">
+  <img src="./docs/demo.gif" alt="Demonstração geral do WorldScope" width="800" />
+</p>
 
-🔗 **Acesse o projeto:** [https://worldscope-navy.vercel.app](https://worldscope-navy.vercel.app)
+## ✅ Funcionalidades
 
-## ✨ Funcionalidades
+A página inicial exibe os países em cards com bandeira, nome, região, população e moeda principal. A listagem possui busca em tempo real, filtro por região, ordenação por nome ou população e paginação.
 
-### Listagem de países
+<p align="center">
+  <img src="./docs/filters.gif" alt="Demonstração dos filtros de busca" width="800" />
+</p>
 
-- Exibição de países em cards
-- Bandeira, nome, região, população e moeda principal
-- Busca por nome em tempo real
-- Filtro por região
-- Ordenação por nome e população
-- Paginação dos resultados
+Ao selecionar um país, o usuário é direcionado para uma página dedicada com informações completas, incluindo nome oficial, capital, região, sub-região, população, área territorial, moedas, idiomas falados, fusos horários e países fronteiriços clicáveis.
 
-### Página de detalhes
+<p align="center">
+  <img src="./docs/borders.gif" alt="Demonstração de navegação entre países fronteiriços" width="800" />
+</p>
 
-- Bandeira do país
-- Nome comum e nome oficial
-- Capital
-- Região e sub-região
-- População
-- Área territorial
-- Moedas
-- Idiomas falados
-- Fusos horários
-- Países fronteiriços clicáveis
+A interface também conta com tema claro, escuro e sistema, com persistência da preferência entre sessões.
 
-## 🛠️ Tecnologias
+<p align="center">
+  <img src="./docs/theme-toggle.gif" alt="WorldScope em tema escuro" width="800" />
+</p>
 
-- **React** — utilizado para construir a interface em componentes reutilizáveis.
-- **TypeScript** — utilizado para tipar os dados da API, props dos componentes e funções auxiliares, reduzindo erros durante o desenvolvimento.
-- **Vite** — escolhido pelo setup simples, build rápido e boa integração com React.
-- **Tailwind CSS** — utilizado para criar uma interface responsiva, consistente.
-- **React Router DOM** — utilizado para controlar a navegação entre a listagem de países e a página de detalhes.
-- **TanStack Query** — gerenciador de requisições, estados de carregamento, erros e cache dos dados. Como os dados de países mudam com pouca frequência, o cache ajuda a reduzir chamadas desnecessárias à API. O trade-off é adicionar uma dependência extra, mas com ganho em organização e performance percebida.
-- **Lucide React** — utilizado para ícones leves e consistentes na interface.
-- **RestCountries API v5** — fonte dos dados geográficos exibidos pela aplicação.
+Outros estados tratados pela aplicação:
+
+- carregamento com skeleton loading
+- erro de API com mensagem amigável
+- estado vazio quando nenhum país é encontrado
+- fallback para dados ausentes retornados pela API
+- layout responsivo para desktop e mobile
 
 ---
 
-## 📦 Como rodar
+## Tecnologias
 
-### 1. Clone o repositório
+- **React**: construção da interface com componentes reutilizáveis.
+- **TypeScript**: tipagem dos dados da API, props, hooks e funções auxiliares.
+- **Vite**: ambiente de desenvolvimento rápido e simples.
+- **Tailwind CSS**: estilização responsiva.
+- **React Router DOM**: gerenciamento de rotas da aplicação.
+- **TanStack Query**: gerenciamento de requisições, loading, erros e cache dos dados. Como os dados de países mudam com pouca frequência, o cache reduz chamadas desnecessárias à API. Apesar de adicionar uma dependência extra, há um ganho em organização e performance percebida.
+- **Lucide React**: ícones leves e consistentes.
+- **RestCountries API v5**: fonte dos dados geográficos.
+
+## Como rodar localmente
+
+Clone o repositório:
 
 ```bash
 git clone https://github.com/not2nder/worldscope-knex-challenge.git
@@ -105,6 +109,8 @@ A aplicação estará disponível em: `http://localhost:5173`
 
 ## 🗂️ Estrutura do Projeto
 
+A estrutura do projeto foi organizada de forma a separar responsabilidades e facilitar a manutenção do código.
+
 ```txt
 src/
 ├── assets/         Logos e arquivos estáticos usados pela UI
@@ -116,7 +122,9 @@ src/
 ├── services/       Comunicação com APIs externas
 ├── styles/         Estilos globais
 ├── types/          Tipagens TypeScript compartilhadas
-├── utils/          Funções auxiliares e regras puras
+├── utils/          Funções auxiliares
 ├── App.tsx         Componente raiz da aplicação
 └── main.tsx        Ponto de entrada do React
 ```
+
+Essa organização mantém os componentes focados na interface, enquanto regras de busca, filtros, rotas, tipagens e chamadas externas ficam isoladas em suas próprias camadas. Dessa forma, o projeto se torna mais fácil de entender e expandir.
