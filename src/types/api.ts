@@ -1,4 +1,4 @@
-import type { Country } from "./country"
+import type { Country } from "./country";
 
 export type APIResponse = {
   data: {
@@ -9,4 +9,4 @@ export type APIResponse = {
     };
     objects: Country[];
   };
-}
+};

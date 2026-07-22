@@ -4,7 +4,7 @@ export type Country = {
     official: string;
   };
 
-  capitals: {
+  capitals?: {
     name: string;
   }[];
 
@@ -13,19 +13,19 @@ export type Country = {
     alpha_2?: string;
   };
 
-  languages: {
+  languages?: {
     name: string;
   }[];
 
   region: string;
-  subregion: string;
+  subregion?: string;
 
   flag: {
-    url_png: string;
-    url_svg: string;
-    emoji: string;
-    colors: {
-      palette: {
+    url_png?: string;
+    url_svg?: string;
+    emoji?: string;
+    colors?: {
+      palette?: {
         hex: string;
       }[];
     };
@@ -33,16 +33,16 @@ export type Country = {
 
   population: number;
 
-  currencies: {
-    code: string;
-    name: string;
-    symbol: string;
+  currencies?: {
+    code?: string;
+    name?: string;
+    symbol?: string;
   }[];
 
-  area: {
-    kilometers: number;
+  area?: {
+    kilometers?: number;
   };
 
   timezones?: string[];
-  borders?: string[];
+  borders: string[];
 };

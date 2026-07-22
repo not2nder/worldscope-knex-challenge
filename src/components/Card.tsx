@@ -12,13 +12,13 @@ type CardProps = {
 export default function Card({ country }: CardProps) {
   return (
     <Link to={getCountryRoute(country)} className="group">
-      <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md dark:border-slate-800 dark:bg-slate-900">
         <img
           src={
             (country.flag?.url_svg ?? country.flag?.url_png) || flagPlaceholder
           }
           alt={`Flag of ${country.names.common}`}
-          className="aspect-video h-full w-full rounded-md object-cover object-center transition duration-300 group"
+          className="aspect-video h-full w-full rounded-md object-cover object-center"
         />
 
         <div className="space-y-3 pt-3 text-sm">

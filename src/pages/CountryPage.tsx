@@ -40,8 +40,10 @@ export default function CountryPage() {
       </MainLayout>
     );
   }
+  const flagUrl =
+    (country.flag?.url_svg ?? country.flag?.url_png) || flagPlaceholder;
 
-  const hasFlagImage = Boolean(country.flag?.url_svg ?? country.flag?.url_png);
+  const flagColors = country.flag?.colors?.palette || [];
 
   const capitals =
     country.capitals?.map((capital) => capital.name).join(", ") ||
@@ -77,28 +79,29 @@ export default function CountryPage() {
 
         <div className="grid gap-4 lg:grid-cols-2">
           {/* left */}
-          <div className="space-y-2.5 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
-            <img
-              src={
-                country.flag.url_svg || country.flag.url_png || flagPlaceholder
-              }
-              alt={`Flag of ${country.names.common}`}
-              className="aspect-video w-full rounded-md object-cover object-center"
-            />
+          {/* left */}
+          <div className="self-start space-y-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
+            <div className="overflow-hidden rounded-md bg-slate-100 dark:bg-slate-800">
+              <img
+                src={flagUrl}
+                alt={`Flag of ${country.names.common}`}
+                className="aspect-video w-full object-cover object-center"
+              />
+            </div>
 
-            {hasFlagImage && country.flag?.colors?.palette?.length > 0 && (
-              <div className="border-slate-100">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            {flagColors.length > 0 && (
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
                   Flag palette
                 </p>
 
-                <div className="flex items-center gap-2">
-                  {country.flag?.colors.palette.map((color) => (
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  {flagColors.map((color) => (
                     <div
                       key={color.hex}
                       title={color.hex}
                       style={{ backgroundColor: color.hex }}
-                      className="h-7 w-7 rounded-full"
+                      className="h-7 w-7 rounded-full ring-1 ring-slate-900/10 dark:ring-white/10"
                     />
                   ))}
                 </div>
@@ -121,7 +124,7 @@ export default function CountryPage() {
             </div>
 
             <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-              {country.flag?.emoji} {country.names.common}
+              {country.flag.emoji} {country.names.common}
             </h2>
 
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
@@ -186,7 +189,7 @@ export default function CountryPage() {
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Border Countries ({country.borders?.length ?? 0})
+                  Border Countries ({country.borders.length ?? 0})
                 </h3>
               </div>
             </div>
@@ -209,7 +212,7 @@ export default function CountryPage() {
                 ))}
               </div>
             ) : (
-              <div className="mt-4 rounded-lg border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
+              <div className="py-2 text-slate-400">
                 This country has no listed border countries.
               </div>
             )}

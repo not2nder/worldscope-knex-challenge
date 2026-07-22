@@ -15,7 +15,8 @@ export default function DetailsSkeleton() {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* left */}
-        <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        {/* left */}
+        <div className="self-start space-y-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="overflow-hidden rounded-md bg-slate-100 dark:bg-slate-800">
             <img
               src={imagePlaceholder}
@@ -25,7 +26,7 @@ export default function DetailsSkeleton() {
             />
           </div>
 
-          <div className="border-t border-slate-100 pt-3 dark:border-slate-800">
+          <div>
             <div className="h-4 w-28 animate-pulse rounded-md bg-slate-200 dark:bg-slate-800" />
 
             <div className="mt-3 flex items-center gap-2">

@@ -9,8 +9,14 @@ export async function getCountriesPage(
   offset: number,
 ): Promise<APIResponse> {
   const response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`, {
-    headers: { Authorization: `Bearer ${API_KEY}` },
+    headers: {
+      Authorization: `Bearer ${API_KEY}`,
+    },
   });
+
+  if (!response.ok) {
+    throw new Error("Could not load countries.");
+  }
 
   return response.json();
 }
@@ -39,7 +45,7 @@ export async function getCountryByCode(code: string): Promise<Country> {
   });
 
   if (!response.ok) {
-    throw new Error("Could not load country deatils");
+    throw new Error("Could not load country deatils.");
   }
 
   const data: APIResponse = await response.json();

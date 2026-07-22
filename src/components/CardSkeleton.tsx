@@ -2,7 +2,7 @@ import imagePlaceholder from "../assets/imagePlaceholder.svg";
 
 export default function CardSkeleton() {
   return (
-    <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition-all duration-200 dark:border-slate-800 dark:bg-slate-900">
+    <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm duration-200 dark:border-slate-800 dark:bg-slate-900">
       <div className="overflow-hidden rounded-md bg-slate-100 dark:bg-slate-800">
         <img
           src={imagePlaceholder}

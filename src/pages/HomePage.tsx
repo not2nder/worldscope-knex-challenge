@@ -64,7 +64,7 @@ export default function HomePage() {
             </span>
 
             <h1 className="text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl dark:text-slate-100">
-              Discover countries with{" "}
+              Discover the world through{" "}
               <span className="bg-linear-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
                 WorldScope
               </span>
@@ -93,7 +93,7 @@ export default function HomePage() {
                   setPage(1);
                 }}
                 placeholder="Search Countries..."
-                className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/10 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 dark:hover:border-slate-700"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none placeholder:text-slate-400 hover:border-slate-300 focus:border-cyan-500 focus:outline-2 focus:outline-offset-2 focus:outline-cyan-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 dark:hover:border-slate-700"
               />
             </div>
 
@@ -104,7 +104,7 @@ export default function HomePage() {
                   setSelectedRegion(event.target.value);
                   setPage(1);
                 }}
-                className="h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/10 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-700"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 outline-none hover:border-slate-300 focus:border-cyan-500 focus:outline-2 focus:outline-offset-2 focus:outline-cyan-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-700"
               >
                 <option value="all">All Regions</option>
 
@@ -121,7 +121,7 @@ export default function HomePage() {
                   setSortOption(event.target.value as SortOption);
                   setPage(1);
                 }}
-                className="h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 outline-none transition hover:border-slate-300 focus:border-cyan-400 focus:ring-4 focus:ring-cyan-500/10 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-700"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 outline-none hover:border-slate-300 focus:border-cyan-500 focus:outline-2 focus:outline-offset-2 focus:outline-cyan-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-700"
               >
                 {SORT_GROUPS.map((group) => (
                   <option key={group} value={group}>
@@ -172,9 +172,7 @@ export default function HomePage() {
           <Pagination
             totalPages={totalPages}
             currentPage={page}
-            totalItems={sortedCountries.length}
             onPageChange={setPage}
-            currentItems={paginatedCountries.length}
           />
         )}
       </div>
